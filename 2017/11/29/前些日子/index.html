@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前些日子还是干了些事情的。。。 自动化上传格式文件一个多月的时间干这个事情，对数据的格式要求较为严格，所以较长时间花费在写数据的格式化脚本上。 前期思路有一些写好的软件，将这些软件按照一定的顺序和要求执行完毕可完成数据的格式化操作。故准备写一个串行脚本，将这些软件串起来，当时还考虑到可扩展性与统一的需要，打算用配置文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前些日子">
+<meta property="og:url" content="http://yoursite.com/2017/11/29/前些日子/index.html">
+<meta property="og:site_name" content="b33t1e">
+<meta property="og:description" content="前些日子还是干了些事情的。。。 自动化上传格式文件一个多月的时间干这个事情，对数据的格式要求较为严格，所以较长时间花费在写数据的格式化脚本上。 前期思路有一些写好的软件，将这些软件按照一定的顺序和要求执行完毕可完成数据的格式化操作。故准备写一个串行脚本，将这些软件串起来，当时还考虑到可扩展性与统一的需要，打算用配置文件的方式来实现各软件的调度运行。 但是。。。由于开发者水平问题，那些软件真的烂，时">
+<meta property="og:updated_time" content="2017-11-30T01:49:32.850Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前些日子">
+<meta name="twitter:description" content="前些日子还是干了些事情的。。。 自动化上传格式文件一个多月的时间干这个事情，对数据的格式要求较为严格，所以较长时间花费在写数据的格式化脚本上。 前期思路有一些写好的软件，将这些软件按照一定的顺序和要求执行完毕可完成数据的格式化操作。故准备写一个串行脚本，将这些软件串起来，当时还考虑到可扩展性与统一的需要，打算用配置文件的方式来实现各软件的调度运行。 但是。。。由于开发者水平问题，那些软件真的烂，时">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>前些日子</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/11/29/写在前面/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/29/前些日子/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/29/前些日子/&text=前些日子"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/29/前些日子/&title=前些日子"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/29/前些日子/&is_video=false&description=前些日子"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前些日子&body=Check out this article: http://yoursite.com/2017/11/29/前些日子/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/29/前些日子/&title=前些日子"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/29/前些日子/&title=前些日子"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/29/前些日子/&title=前些日子"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/29/前些日子/&title=前些日子"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/29/前些日子/&name=前些日子&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#自动化上传格式文件"><span class="toc-number">1.</span> <span class="toc-text">自动化上传格式文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前期思路"><span class="toc-number">1.1.</span> <span class="toc-text">前期思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化脚本学到的"><span class="toc-number">1.2.</span> <span class="toc-text">格式化脚本学到的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传中遇到的坑"><span class="toc-number">1.3.</span> <span class="toc-text">上传中遇到的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后期解决"><span class="toc-number">1.4.</span> <span class="toc-text">后期解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结"><span class="toc-number">1.5.</span> <span class="toc-text">结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于代理的web扫描器"><span class="toc-number">2.</span> <span class="toc-text">基于代理的web扫描器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扫描策略研究"><span class="toc-number">3.</span> <span class="toc-text">扫描策略研究</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#路由器"><span class="toc-number">4.</span> <span class="toc-text">路由器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#seebug-paper"><span class="toc-number">5.</span> <span class="toc-text">seebug paper</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接活"><span class="toc-number">6.</span> <span class="toc-text">接活</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#这篇就到这"><span class="toc-number">7.</span> <span class="toc-text">这篇就到这</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        前些日子
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">b33t1e</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-11-29T05:20:14.000Z" itemprop="datePublished">2017-11-29</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>前些日子还是干了些事情的。。。</p>
+<h1 id="自动化上传格式文件"><a href="#自动化上传格式文件" class="headerlink" title="自动化上传格式文件"></a>自动化上传格式文件</h1><p>一个多月的时间干这个事情，对数据的格式要求较为严格，所以较长时间花费在写数据的格式化脚本上。</p>
+<h2 id="前期思路"><a href="#前期思路" class="headerlink" title="前期思路"></a>前期思路</h2><p>有一些写好的软件，将这些软件按照一定的顺序和要求执行完毕可完成数据的格式化操作。故准备写一个串行脚本，将这些软件串起来，当时还考虑到可扩展性与统一的需要，打算用配置文件的方式来实现各软件的调度运行。</p>
+<p>但是。。。由于开发者水平问题，那些软件真的烂，时常崩溃。虽然自己的脚本也挺烂。。。再加上不想去理解这些软件的输入输出以及想去掉其中的一些不必要的操作，所以这个思路就弃了</p>
+<h2 id="格式化脚本学到的"><a href="#格式化脚本学到的" class="headerlink" title="格式化脚本学到的"></a>格式化脚本学到的</h2><p>在对文件进行格式化的过程中，也学到了一些东西。</p>
+<p>Python编码问题、Python对docx的操作等</p>
+<h2 id="上传中遇到的坑"><a href="#上传中遇到的坑" class="headerlink" title="上传中遇到的坑"></a>上传中遇到的坑</h2><p>文件格式化做好后，开始考虑web端的自动化。</p>
+<p>web端操作的顺序为:</p>
+<ol>
+<li><p>登录</p>
+</li>
+<li><p>新建一个要上传的文件网页</p>
+</li>
+<li><p>在这个网页进行一系列选择和输入，完善文件的一些属性及说明信息</p>
+</li>
+<li><p>上传一些附带文件</p>
+</li>
+<li><p>完成后会跳转到一个在线编辑页面，然后在在线编辑页面对文件继续进行完善，编辑采用word的形式</p>
+</li>
+<li><p>编辑完保存就算完成一个格式文件的上传</p>
+</li>
+</ol>
+<p>web端采用IE + ActiveX(上传及Word编辑)</p>
+<p>IE真是烂，再加上一个低版本的word在线编辑器(ZSOffice)，由于版本的问题，官方提供的API手册，很多在低版本中都无法使用，真时烂到爆炸</p>
+<p>为了解决在web端的Word编辑器中自动修改文本的问题，实验了以下思路：</p>
+<ol>
+<li><p>考虑到上传过程中的数据传输，想通过抓包修改文本。 -&gt; 由于流量包中没有发现待修改文本数据，同时数据的交互过程采用了一种我看不懂的编码，所以弃了</p>
+</li>
+<li><p>考虑到Activex控件，想通过控件本身的API或其使用的前端JS函数修改。 -&gt; 待修改文本倒是在控件的DocText属性中找到了，但控件本身并没有提供对其修改的函数接口，也许是我没找到，也许是客户端不能用JS修改，而且官方的手册上的不能用，所以弃了</p>
+</li>
+<li><p>查看本地进程发现，在线编辑其实在本地开启了一个word进程，所以想通过进程注入的方式去修改文本。-&gt; 通过暴搜内存找到了待修改的字符串，但修改后无法在web端实时显示修改结果，而且保存的话，无法将修改结果同步到web端，需要在web端手动编辑执行类似的刷新操作才行，但没有想到怎么解决这个刷新操作，所以弃了</p>
+</li>
+<li><p>使用selenium进行动态模拟 -&gt; 脚本写到最后一步，才发现不行。。。mmp，在跳转到在线编辑页面时，selenium提供的IEDriver.exe生成的浏览器会莫名崩溃，前面的一系列操作都没问题</p>
+</li>
+<li><p>在使用selenium的过程中，在登录上，由于用户名是中文，在sendkeys(u”中文名”)时总是不成功，IE会莫名崩溃，由于时间有限也没去调。尝试了一系列编码以及解决途径，猜测是垃圾IE的问题，也有可能是url编码的问题。 -&gt; 这里采用了一种绕过的方法，在本地事先生成好中文名的文本文件，在web端访问该本地文件，然后使用selenium提供的鼠标键盘模拟的API去模拟ctrl-a + ctrl-c + ctrl-v 操作，完成了向输入框中输入中文，也算是自己觉着比较猥琐的一个思路吧，哈哈</p>
+</li>
+</ol>
+<h2 id="后期解决"><a href="#后期解决" class="headerlink" title="后期解决"></a>后期解决</h2><p>老板催进度，没办法，只能想一个垃圾的解决方法，就是使用最原始的鼠标键盘模拟去写了。</p>
+<p>最开始是自己写，用了python + pyautogui，本来是想直接定位像素点，把像素点写死到脚本里的，但稳定性实在太烂，所以打算用录制 + 回放的思路。</p>
+<p>在录制的过程中使用了pyhook，由于pyhook中提供的鼠标键盘事件信息不能够直接被pyautogui使用，所以自己去尝试定义鼠标键盘事件的格式，但需要考虑的东西太多了，所以准备换思路</p>
+<p>想到鼠标键盘模拟，这玩意肯定有现成的，就去google了下，找到一堆，而且基本都是支持录制 + 回放的，这样就解决了模拟问题。</p>
+<h2 id="结"><a href="#结" class="headerlink" title="结"></a>结</h2><p>这个事情算告一段落，脚本 + 工具勉强能用，听说下一步会换上传平台，等着换平台看看能不能写个真正的自动化吧</p>
+<h1 id="基于代理的web扫描器"><a href="#基于代理的web扫描器" class="headerlink" title="基于代理的web扫描器"></a>基于代理的web扫描器</h1><p>大学的时候，几个同学靠这个东西小赚了一笔，听说是猪猪侠先把这个思路在乌云放出来的，当时还想着自己也搭个玩，但一直没能实现。</p>
+<p>花了一周的时间研究了下，发现也没想象中的那么diao，应该是这个思路在当时较为适用，所以在当时能够挖到不少的洞吧，但问了下几位师傅，发现现在的效益不是很好。</p>
+<p>也算是还个愿，就想着把这个东西学了，主要是学习下思路，搭了一个最简单的实验版，感觉能不能扫到洞，还是要看扫描器，不过这个思想还是很值得学习的。</p>
+<p>参考某大佬的<a href="https://github.com/netxfly/passive_scan" target="_blank" rel="noopener">github</a></p>
+<p>听说效益不好，也就没有在vpn上在继续深入下去。</p>
+<p>概括性的总结下：</p>
+<p>vpn上搭个代理 -&gt; 用户的流量经过代理 -&gt; 代理将流量中的可用信息存储在mongodb -&gt; 后台的任务分发模块将流量交给扫描器 -&gt; 扫描器利用流量扫描 -&gt; 有洞报洞，没洞拉倒</p>
+<p>这里可以在扫描策略以及报告上进行优化，减少误报和漏报，所以还是看扫描器</p>
+<p>没有深入研究，不对的轻喷。。。</p>
+<h1 id="扫描策略研究"><a href="#扫描策略研究" class="headerlink" title="扫描策略研究"></a>扫描策略研究</h1><p>上面搞完那个代理，又对扫描策略产生了兴趣，遂以AWVS为例，简单学习了下扫描策略。</p>
+<p>参考某大佬<a href="http://blog.wils0n.cn/archives/145/" target="_blank" rel="noopener">blog</a>，挺新的东西，blog中说扫描器的核心是规则，这点还是很赞同的。</p>
+<p>浏览了下其中提及的AcuSensor和AcuMonitor技术，官方说很diao，自己也没细看，以后如果搞扫描器相关的，会去借鉴下。</p>
+<h1 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h1><p>前些日子网总是莫名其妙的断，由于网关是由公司里的一个人专门管理的，会对流量进行监控，怀疑做了限制，感觉好不爽，所以想把网关干了，看看做了什么限制。</p>
+<p>用nmap扫了下，开了http、telnet。</p>
+<p>web端连上去，发现是H3C ER3200路由器。</p>
+<p>先弱口令，不行。抓了下流量，用户名和密码都是明文，但存在验证码。虽说验证码简单，可以用机器学习绕过，网上也可能有现成的，但麻烦，就没去爆破。</p>
+<p>google了下，找到了默认用户名密码，试了下，不行。ER5100有一个洞，版本差不多，看能不能用，不行。</p>
+<p>以前研究过routersploit，但这个H3C人家不支持。自己没闲到下固件挖洞的地步，主要是道行不够，所以漏洞方面的话，gg。</p>
+<p>只剩telnet，用routersploit的telnet模块跑了下，不行，gg。</p>
+<p>上网问题还得解决，所以对公司常年开着的几台服务器起了歹心，这几台机器的网很好，带宽也很大，想着在上面搭个代理，用这些服务器去转发我的流量到公网。然而，不在一个局域网内，gg。</p>
+<p>这期间，又有了搞固件的想法，而且发现了公司仓库闲置的无人机，某当搜索无人机破解相关书籍，没有。问了下老板，不让随便用，qnmd，不玩了。</p>
+<h1 id="seebug-paper"><a href="#seebug-paper" class="headerlink" title="seebug paper"></a>seebug paper</h1><p>又开始瞎看了，发现seebug的一些paper还挺有质量的，就打算花点时间浏览浏览，看看最近有啥好玩的，开阔下视野。</p>
+<p>学到了一些新姿势:</p>
+<p><a href="https://mp.weixin.qq.com/s/3v_dGXGZ_RkVyMxl6s3MIg" target="_blank" rel="noopener">用系统白程序MSBuild执行恶意代码</a></p>
+<p><a href="https://paper.seebug.org/449/" target="_blank" rel="noopener">PHP层面的WAF-PHP RASP</a></p>
+<p>就较为深入的看了这两个</p>
+<h1 id="接活"><a href="#接活" class="headerlink" title="接活"></a>接活</h1><p>朋友之托，接了两个活，接下来就干这两个活了吧。</p>
+<p>一个是微信公众平台开发，看了下，好像没啥难度，跟搭个blog差不多，而且可以用php，挺棒的。</p>
+<p>一个是Android开发，这个手比较生，而且是一个毕设，要求蛮多，估计得一段时间。</p>
+<h1 id="这篇就到这"><a href="#这篇就到这" class="headerlink" title="这篇就到这"></a>这篇就到这</h1>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#自动化上传格式文件"><span class="toc-number">1.</span> <span class="toc-text">自动化上传格式文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前期思路"><span class="toc-number">1.1.</span> <span class="toc-text">前期思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化脚本学到的"><span class="toc-number">1.2.</span> <span class="toc-text">格式化脚本学到的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传中遇到的坑"><span class="toc-number">1.3.</span> <span class="toc-text">上传中遇到的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后期解决"><span class="toc-number">1.4.</span> <span class="toc-text">后期解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结"><span class="toc-number">1.5.</span> <span class="toc-text">结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基于代理的web扫描器"><span class="toc-number">2.</span> <span class="toc-text">基于代理的web扫描器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扫描策略研究"><span class="toc-number">3.</span> <span class="toc-text">扫描策略研究</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#路由器"><span class="toc-number">4.</span> <span class="toc-text">路由器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#seebug-paper"><span class="toc-number">5.</span> <span class="toc-text">seebug paper</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#接活"><span class="toc-number">6.</span> <span class="toc-text">接活</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#这篇就到这"><span class="toc-number">7.</span> <span class="toc-text">这篇就到这</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/11/29/前些日子/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/11/29/前些日子/&text=前些日子"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/11/29/前些日子/&title=前些日子"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/11/29/前些日子/&is_video=false&description=前些日子"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=前些日子&body=Check out this article: http://yoursite.com/2017/11/29/前些日子/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/11/29/前些日子/&title=前些日子"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/11/29/前些日子/&title=前些日子"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/11/29/前些日子/&title=前些日子"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/11/29/前些日子/&title=前些日子"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/11/29/前些日子/&name=前些日子&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 b33t1e
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
