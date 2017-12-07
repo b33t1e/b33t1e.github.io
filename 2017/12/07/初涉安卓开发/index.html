@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="上篇blog也说了，要帮朋友做一个安卓开发的毕设。但没有接触过安卓开发，就开始找教程。 没接触过，不想看blog之类的，想看个比较体系化的教程。首先看了菜鸟教程，不适合初学者，弃了。又去看第一行代码，不得不说，真的很适合初学者。 看的很快，边看边开发，很快就做完了，只是把功能做完了，完全不想管美工这一块，所以很丑。没遇">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初涉安卓开发">
+<meta property="og:url" content="http://yoursite.com/2017/12/07/初涉安卓开发/index.html">
+<meta property="og:site_name" content="b33t1e">
+<meta property="og:description" content="上篇blog也说了，要帮朋友做一个安卓开发的毕设。但没有接触过安卓开发，就开始找教程。 没接触过，不想看blog之类的，想看个比较体系化的教程。首先看了菜鸟教程，不适合初学者，弃了。又去看第一行代码，不得不说，真的很适合初学者。 看的很快，边看边开发，很快就做完了，只是把功能做完了，完全不想管美工这一块，所以很丑。没遇到什么很大的坑，主要AS太强，不需要操心。本来想放github上的，但代码实在低">
+<meta property="og:updated_time" content="2017-12-07T08:32:23.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初涉安卓开发">
+<meta name="twitter:description" content="上篇blog也说了，要帮朋友做一个安卓开发的毕设。但没有接触过安卓开发，就开始找教程。 没接触过，不想看blog之类的，想看个比较体系化的教程。首先看了菜鸟教程，不适合初学者，弃了。又去看第一行代码，不得不说，真的很适合初学者。 看的很快，边看边开发，很快就做完了，只是把功能做完了，完全不想管美工这一块，所以很丑。没遇到什么很大的坑，主要AS太强，不需要操心。本来想放github上的，但代码实在低">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>初涉安卓开发</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/11/29/前些日子/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/12/07/初涉安卓开发/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/12/07/初涉安卓开发/&text=初涉安卓开发"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/12/07/初涉安卓开发/&title=初涉安卓开发"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/12/07/初涉安卓开发/&is_video=false&description=初涉安卓开发"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=初涉安卓开发&body=Check out this article: http://yoursite.com/2017/12/07/初涉安卓开发/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/12/07/初涉安卓开发/&title=初涉安卓开发"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/12/07/初涉安卓开发/&title=初涉安卓开发"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/12/07/初涉安卓开发/&title=初涉安卓开发"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/12/07/初涉安卓开发/&title=初涉安卓开发"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/12/07/初涉安卓开发/&name=初涉安卓开发&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开发中学到的"><span class="toc-number">1.</span> <span class="toc-text">开发中学到的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后续"><span class="toc-number">2.</span> <span class="toc-text">后续</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        初涉安卓开发
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">b33t1e</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-12-07T08:02:08.000Z" itemprop="datePublished">2017-12-07</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Android/">Android</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>上篇blog也说了，要帮朋友做一个安卓开发的毕设。但没有接触过安卓开发，就开始找教程。</p>
+<p>没接触过，不想看blog之类的，想看个比较体系化的教程。首先看了菜鸟教程，不适合初学者，弃了。又去看第一行代码，不得不说，真的很适合初学者。</p>
+<p>看的很快，边看边开发，很快就做完了，只是把功能做完了，完全不想管美工这一块，所以很丑。没遇到什么很大的坑，主要AS太强，不需要操心。本来想放github上的，但代码实在低级和垃圾。</p>
+<p>所以这篇就是为了推荐《第一行代码》这本书，对于我这种安卓初学菜鸡真心好用。</p>
+<h1 id="开发中学到的"><a href="#开发中学到的" class="headerlink" title="开发中学到的"></a>开发中学到的</h1><ol>
+<li>有想法就自己实现，不要总想着copy别人的思路和代码</li>
+<li>功能代码很简单，美工布局很难，不想碰安卓开发的原因之一</li>
+<li>安卓环境真的吃配置，特别是在调试的时候，不想碰安卓的原因之一</li>
+</ol>
+<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><ol>
+<li>可能会按朋友毕设的要求优化下这个app</li>
+<li>最近接了个需要大量下载某个东西的活，可能会去写个下载器</li>
+<li>上篇说的微信公众平台的开发，那个朋友把我鸽了</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开发中学到的"><span class="toc-number">1.</span> <span class="toc-text">开发中学到的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#后续"><span class="toc-number">2.</span> <span class="toc-text">后续</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2017/12/07/初涉安卓开发/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2017/12/07/初涉安卓开发/&text=初涉安卓开发"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2017/12/07/初涉安卓开发/&title=初涉安卓开发"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2017/12/07/初涉安卓开发/&is_video=false&description=初涉安卓开发"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=初涉安卓开发&body=Check out this article: http://yoursite.com/2017/12/07/初涉安卓开发/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2017/12/07/初涉安卓开发/&title=初涉安卓开发"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2017/12/07/初涉安卓开发/&title=初涉安卓开发"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2017/12/07/初涉安卓开发/&title=初涉安卓开发"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2017/12/07/初涉安卓开发/&title=初涉安卓开发"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2017/12/07/初涉安卓开发/&name=初涉安卓开发&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 b33t1e
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
