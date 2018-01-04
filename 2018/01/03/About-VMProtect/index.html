@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="书接上文上篇中说到，会去写个下载器。 由于下载过程中需要大量人工交互，所以没有自动化的必要。 但下载所用到的软件需要注册，大几千块，虽然公司购买了，但只有一台电脑能用，原因可能是注册过程中有标识机器唯一性的码的参与，具体没细看。 想着crack，查壳，VMProtect 3.x的壳，哇，极有兴趣！！！ 但到我写这篇bl">
+<meta name="keywords" content="reverse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="About VMProtect">
+<meta property="og:url" content="http://yoursite.com/2018/01/03/About-VMProtect/index.html">
+<meta property="og:site_name" content="b33t1e">
+<meta property="og:description" content="书接上文上篇中说到，会去写个下载器。 由于下载过程中需要大量人工交互，所以没有自动化的必要。 但下载所用到的软件需要注册，大几千块，虽然公司购买了，但只有一台电脑能用，原因可能是注册过程中有标识机器唯一性的码的参与，具体没细看。 想着crack，查壳，VMProtect 3.x的壳，哇，极有兴趣！！！ 但到我写这篇blog的时候，我就丧失了大半兴致，这里只是留个桩，如果以后遇到VMProtect，">
+<meta property="og:updated_time" content="2018-01-04T13:43:57.843Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="About VMProtect">
+<meta name="twitter:description" content="书接上文上篇中说到，会去写个下载器。 由于下载过程中需要大量人工交互，所以没有自动化的必要。 但下载所用到的软件需要注册，大几千块，虽然公司购买了，但只有一台电脑能用，原因可能是注册过程中有标识机器唯一性的码的参与，具体没细看。 想着crack，查壳，VMProtect 3.x的壳，哇，极有兴趣！！！ 但到我写这篇blog的时候，我就丧失了大半兴致，这里只是留个桩，如果以后遇到VMProtect，">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>About VMProtect</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2017/12/07/初涉安卓开发/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/03/About-VMProtect/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/03/About-VMProtect/&text=About VMProtect"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/03/About-VMProtect/&title=About VMProtect"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/03/About-VMProtect/&is_video=false&description=About VMProtect"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=About VMProtect&body=Check out this article: http://yoursite.com/2018/01/03/About-VMProtect/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/03/About-VMProtect/&title=About VMProtect"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/03/About-VMProtect/&title=About VMProtect"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/03/About-VMProtect/&title=About VMProtect"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/03/About-VMProtect/&title=About VMProtect"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/03/About-VMProtect/&name=About VMProtect&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#书接上文"><span class="toc-number">1.</span> <span class="toc-text">书接上文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#VMProtect-入门"><span class="toc-number">2.</span> <span class="toc-text">VMProtect 入门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#VMProtect相关分析"><span class="toc-number">3.</span> <span class="toc-text">VMProtect相关分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#VMProtect-辅助工具"><span class="toc-number">4.</span> <span class="toc-text">VMProtect 辅助工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小结-amp-计划"><span class="toc-number">5.</span> <span class="toc-text">小结 & 计划</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        About VMProtect
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">b33t1e</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-03T08:50:35.000Z" itemprop="datePublished">2018-01-03</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/reverse/">reverse</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="书接上文"><a href="#书接上文" class="headerlink" title="书接上文"></a>书接上文</h1><p>上篇中说到，会去写个下载器。</p>
+<p>由于下载过程中需要大量人工交互，所以没有自动化的必要。</p>
+<p>但下载所用到的软件需要注册，大几千块，虽然公司购买了，但只有一台电脑能用，原因可能是注册过程中有标识机器唯一性的码的参与，具体没细看。</p>
+<p>想着crack，查壳，VMProtect 3.x的壳，哇，极有兴趣！！！</p>
+<p>但到我写这篇blog的时候，我就丧失了大半兴致，这里只是留个桩，如果以后遇到VMProtect，方便继续研究。</p>
+<p>以前就想着研究虚拟机壳，这次趁这个机会好好了解下，半个多月都耗在这上面了，权当写个总结。</p>
+<h1 id="VMProtect-入门"><a href="#VMProtect-入门" class="headerlink" title="VMProtect 入门"></a>VMProtect 入门</h1><p>google了一堆相关资料，然后慢慢读…</p>
+<p>筛选了以下适合入门的资料，认真读完能对VMProtect有一个大致的了解。建议按以下顺序阅读。</p>
+<p><a href="http://static.usenix.org/event/woot09/tech/full_papers/rolles.pdf" title="Unpacking Virtualization Obfuscators" target="_blank" rel="noopener">http://static.usenix.org/event/woot09/tech/full_papers/rolles.pdf</a></p>
+<p>这篇前面在说废话，精华在II-C Method of Circumvention 以及 III-B推荐的几个链接。因为当时是08年，感觉已经把VM机制研究的挺透彻了</p>
+<p>RolfRolles系列：</p>
+<p><a href="http://www.openrce.org/articles/full_view/28" title="强烈推荐" target="_blank" rel="noopener">http://www.openrce.org/articles/full_view/28</a></p>
+<p>这篇读的是最细致的，是当时VM的一种代表，属于简易版VMProtect，但机制什么的跟VMProtect差不多，把这个壳理解了，感觉读相关文章完全不是问题。</p>
+<p>这里专门给HyperUnpackMe2做个总结</p>
+<hr>
+<p>以往的壳都是在前面的桩代码中加入反汇编和反调试的技术，抹去导入信息等，但最终会还原到原始的样子，也就是存在OEP，在此时dump即可脱壳</p>
+<p>这个壳是在理解代码及dump方面设置障碍，比如将部分代码转换成只有内嵌解释器可以执行的字节码（称为VM），还有将部分代码copy到其他地方（称为 stolen bytes, stolen functions）</p>
+<p>idb文件已经将一些地方注释过了，所以看不到本来的面目，找不到原加壳程序    ，idb文件应该是已经被作者写的ida的process module处理过了</p>
+<p>这个壳采用了上面两种机制，他用了VM并且反调试很严重</p>
+<p>作者快速浏览了下，提出以下几个疑点：</p>
+<ol>
+<li><p>模块内部的直接调用被替换掉了，替换成了int 3 / 5x NOP，此时无法确定是直接修复，还是通过SEH修复</p>
+</li>
+<li><p>原来的IIDs和IATs都直接置0</p>
+</li>
+<li><p>并没有直接调用导入表</p>
+</li>
+<li><p>函数调用那一行被置0，即stolen functions</p>
+</li>
+<li><p>call和jmp后面的地址都被置为0</p>
+</li>
+</ol>
+<p>首先是VM机制</p>
+<p>标准的动态分析虽然理论上是可行的，但是你动态跟VM 解析只有该VM能认识的字节码也没什么意思，不懂VM的机制的话，你是不能理解这条VM指令是在干吗的，只是看见一些值在改变，但你不知道这些改变能够最终产生什么效果，有时候可能最终效果就是一个简单的加运算，但中间过程可能会很复杂，涉及到内存移动，加，栈操作等等一系列操作，也就是动态分析容易混乱且找不到重点</p>
+<p>静态分析也比较难，因为不同的VM采用的指令编码方式不一样，并且同一个功能可能指令也不同，即polymorphic。</p>
+<p>VM机制解析（文中扎心的几句话）：</p>
+<ol>
+<li><p>Before the first instruction is executed, the VM context structure is allocated, and the registers and pointers are initialized, which usually involves allocating memory (perhaps on the host stack) for the VM stack. </p>
+</li>
+<li><p>After initialization, the archetypal VM enters into a loop which:Decodes instructions at VM_context.EIP，Performs the commands specified by the instruction, and then Calculates the next EIP. </p>
+</li>
+<li><p>The process of execution usually involves examining the first byte of the instruction and determining which function/switch statement case to execute.</p>
+</li>
+<li><p>Eventually, the VM reaches some stop condition, and either exits or transfers control back to the native processor.</p>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TH_registers</span></span></span><br><span class="line"><span class="class">   &#123;</span></span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">long</span> rESP;    <span class="keyword">unsigned</span> <span class="keyword">long</span> r1;    <span class="keyword">unsigned</span> <span class="keyword">long</span> r2;</span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">long</span> r3;      <span class="keyword">unsigned</span> <span class="keyword">long</span> r4;    <span class="keyword">unsigned</span> <span class="keyword">long</span> r5;</span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">long</span> r6;      <span class="keyword">unsigned</span> <span class="keyword">long</span> r7;    <span class="keyword">unsigned</span> <span class="keyword">long</span> r8;</span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">long</span> r9;      <span class="keyword">unsigned</span> <span class="keyword">long</span> rA;    <span class="keyword">unsigned</span> <span class="keyword">long</span> rB;</span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">long</span> rC;      <span class="keyword">unsigned</span> <span class="keyword">long</span> rD;    <span class="keyword">unsigned</span> <span class="keyword">long</span> rE;</span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">long</span> rF;</span><br><span class="line">   &#125;;    </span><br><span class="line">   <span class="class"><span class="keyword">struct</span> <span class="title">TH_context</span></span></span><br><span class="line"><span class="class">   &#123;</span></span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">char</span> *vm_data;</span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">long</span> vm_data_len;</span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">char</span> *EIP;</span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">long</span> EFLAGS;</span><br><span class="line">       TH_registers registers;</span><br><span class="line">       TH_keyed_mem keyed_mem_array[<span class="number">502</span>];</span><br><span class="line">       <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="built_in">stack</span>[<span class="number">0x9000</span>/<span class="number">4</span>];</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
+<p>可以看出，总体由一个TH_context结构所描述，该结构中包含了一个TH_registers结构</p>
+<p>将原来的代码转换为内嵌VM识别的字节码，该VM对该字节码进行解析，从而理解该字节码所对应的指令功能,从而分发到相应的功能handler，但是指令功能的实现，也就是功能handler的实现，完全是基于原有X86汇编指令功能架构的，从两个例子就可以看出来，只不过是加了一些堆栈转换或者说是为了把原有的x86生硬的改成了VM，所以这个混淆做的不好，作者也举了两个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">TheHyper:0104A159 VM_set_flags_dword:</span><br><span class="line">   TheHyper:0104A159                 cmp     [edi], esi</span><br><span class="line">   TheHyper:0104A15B                 pushf</span><br><span class="line">   TheHyper:0104A15C                 pop     [eax+VM_context_structure.EFLAGS]</span><br><span class="line">   </span><br><span class="line">   TheHyper:0104A316 VM_jz:</span><br><span class="line">   TheHyper:0104A316                 push    [eax+VM_context_structure.EFLAGS]</span><br><span class="line">   TheHyper:0104A319                 popf</span><br><span class="line">   TheHyper:0104A31A                 jnz     short loc_104A31F</span><br><span class="line">   TheHyper:0104A31C                 mov     [eax+VM_context_structure.EIP], edi</span><br><span class="line">   TheHyper:0104A31F loc_104A31F:</span><br><span class="line">   TheHyper:0104A31F                 jmp     short VM_dispatcher_13h_locret</span><br></pre></td></tr></table></figure>
+<p>也就是说instructions are implemented very thinly on top of existing x86 instructions, reflecting the fundamental similarity of this virtual processor to it. </p>
+<p>该程序进入VM的流程比较有意思，来看下，从start开始：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line">TheHyper:0104A87C</span><br><span class="line">TheHyper:0104A87C                                   public start</span><br><span class="line">TheHyper:0104A87C                   start           proc near</span><br><span class="line">TheHyper:0104A87C 55                                push    ebp</span><br><span class="line">TheHyper:0104A87D 8B EC                             mov     ebp, esp</span><br><span class="line">TheHyper:0104A87F 83 EC 14                          sub     esp, 14h</span><br><span class="line">TheHyper:0104A882 8B FC                             mov     edi, esp</span><br><span class="line">TheHyper:0104A884 E8 14 00 00 00                    call    loc_104A89D</span><br><span class="line">TheHyper:0104A884</span><br><span class="line">TheHyper:0104A884                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A889 1A 37 01 01                       dd offset GetProcAddress</span><br><span class="line">TheHyper:0104A88D 16 37 01 01                       dd offset LoadLibraryA</span><br><span class="line">TheHyper:0104A891 0E 6F 03 00                       dd 36F0Eh</span><br><span class="line">TheHyper:0104A895 97 37 01 01                       dd offset unk_1013797</span><br><span class="line">TheHyper:0104A899 2F A8 04 01                       dd offset VM__BeginExecution</span><br><span class="line">TheHyper:0104A89D                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A89D</span><br><span class="line">TheHyper:0104A89D                   loc_104A89D:                            ; CODE XREF: start+8↑p</span><br><span class="line">TheHyper:0104A89D 5E                                pop     esi</span><br><span class="line">TheHyper:0104A89E E8 0D 00 00 00                    call    loc_104A8B0</span><br><span class="line">TheHyper:0104A89E</span><br><span class="line">TheHyper:0104A89E                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A8A3 6B 65 72 6E 65 6C+str__Kernel32_dll_0 db &apos;kernel32.dll&apos;,0</span><br><span class="line">TheHyper:0104A8B0                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A8B0</span><br><span class="line">TheHyper:0104A8B0                   loc_104A8B0:                            ; CODE XREF: start+22↑p</span><br><span class="line">TheHyper:0104A8B0 8B 46 04                          mov     eax, [esi+4]</span><br><span class="line">TheHyper:0104A8B3 FF 10                             call    dword ptr [eax]</span><br><span class="line">TheHyper:0104A8B3</span><br><span class="line">TheHyper:0104A8B5 8B D8                             mov     ebx, eax</span><br><span class="line">TheHyper:0104A8B7 E8 0D 00 00 00                    call    loc_104A8C9</span><br><span class="line">TheHyper:0104A8B7</span><br><span class="line">TheHyper:0104A8B7                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A8BC 56 69 72 74 75 61+str__Virtualalloc db &apos;VirtualAlloc&apos;,0</span><br><span class="line">TheHyper:0104A8C9                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A8C9</span><br><span class="line">TheHyper:0104A8C9                   loc_104A8C9:                            ; CODE XREF: start+3B↑p</span><br><span class="line">TheHyper:0104A8C9 53                                push    ebx</span><br><span class="line">TheHyper:0104A8CA 8B 06                             mov     eax, [esi]</span><br><span class="line">TheHyper:0104A8CC FF 10                             call    dword ptr [eax]</span><br><span class="line">TheHyper:0104A8CC</span><br><span class="line">TheHyper:0104A8CE 89 07                             mov     [edi+VM_API_calls.VirtualAlloc], eax</span><br><span class="line">TheHyper:0104A8D0 E8 0C 00 00 00                    call    loc_104A8E1</span><br><span class="line">TheHyper:0104A8D0</span><br><span class="line">TheHyper:0104A8D0                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A8D5 56 69 72 74 75 61+str__Virtualfree db &apos;VirtualFree&apos;,0</span><br><span class="line">TheHyper:0104A8E1                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A8E1</span><br><span class="line">TheHyper:0104A8E1                   loc_104A8E1:                            ; CODE XREF: start+54↑p</span><br><span class="line">TheHyper:0104A8E1 53                                push    ebx</span><br><span class="line">TheHyper:0104A8E2 8B 06                             mov     eax, [esi]</span><br><span class="line">TheHyper:0104A8E4 FF 10                             call    dword ptr [eax]</span><br><span class="line">TheHyper:0104A8E4</span><br><span class="line">TheHyper:0104A8E6 89 47 04                          mov     [edi+VM_API_calls.VirtualFree], eax</span><br><span class="line">TheHyper:0104A8E9 E8 0F 00 00 00                    call    loc_104A8FD</span><br><span class="line">TheHyper:0104A8E9</span><br><span class="line">TheHyper:0104A8E9                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A8EE 47 65 74 50 72 6F+str__Getprocessheap db &apos;GetProcessHeap&apos;</span><br><span class="line">TheHyper:0104A8FC 00                                db    0</span><br><span class="line">TheHyper:0104A8FD                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A8FD</span><br><span class="line">TheHyper:0104A8FD                   loc_104A8FD:                            ; CODE XREF: start+6D↑p</span><br><span class="line">TheHyper:0104A8FD 53                                push    ebx</span><br><span class="line">TheHyper:0104A8FE 8B 06                             mov     eax, [esi]</span><br><span class="line">TheHyper:0104A900 FF 10                             call    dword ptr [eax]</span><br><span class="line">TheHyper:0104A900</span><br><span class="line">TheHyper:0104A902 89 47 08                          mov     [edi+VM_API_calls.GetProcessHeap], eax</span><br><span class="line">TheHyper:0104A905 E8 0A 00 00 00                    call    loc_104A914</span><br><span class="line">TheHyper:0104A905</span><br><span class="line">TheHyper:0104A905                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A90A 48 65 61 70 41 6C+str__Heapalloc  db &apos;HeapAlloc&apos;</span><br><span class="line">TheHyper:0104A913 00                                align 4</span><br><span class="line">TheHyper:0104A914</span><br><span class="line">TheHyper:0104A914                   loc_104A914:                            ; CODE XREF: start+89↑p</span><br><span class="line">TheHyper:0104A914 53                                push    ebx</span><br><span class="line">TheHyper:0104A915 8B 06                             mov     eax, [esi]</span><br><span class="line">TheHyper:0104A917 FF 10                             call    dword ptr [eax]</span><br><span class="line">TheHyper:0104A917</span><br><span class="line">TheHyper:0104A919 89 47 0C                          mov     [edi+VM_API_calls.HeapAlloc], eax</span><br><span class="line">TheHyper:0104A91C E8 09 00 00 00                    call    loc_104A92A</span><br><span class="line">TheHyper:0104A91C</span><br><span class="line">TheHyper:0104A91C                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A921 48 65 61 70 46 72+str__Heapfree   db &apos;HeapFree&apos;,0</span><br><span class="line">TheHyper:0104A92A                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A92A</span><br><span class="line">TheHyper:0104A92A                   loc_104A92A:                            ; CODE XREF: start+A0↑p</span><br><span class="line">TheHyper:0104A92A 53                                push    ebx</span><br><span class="line">TheHyper:0104A92B 8B 06                             mov     eax, [esi]</span><br><span class="line">TheHyper:0104A92D FF 10                             call    dword ptr [eax]</span><br><span class="line">TheHyper:0104A92D</span><br><span class="line">TheHyper:0104A92F 89 47 10                          mov     [edi+VM_API_calls.HeapFree], eax</span><br><span class="line">TheHyper:0104A932 57                                push    edi</span><br><span class="line">TheHyper:0104A933 FF 76 08                          push    dword ptr [esi+8]</span><br><span class="line">TheHyper:0104A936 FF 76 0C                          push    dword ptr [esi+0Ch]</span><br><span class="line">TheHyper:0104A939 FF 56 10                          call    dword ptr [esi+10h]</span><br><span class="line">TheHyper:0104A939</span><br><span class="line">TheHyper:0104A93C 8B E5                             mov     esp, ebp</span><br><span class="line">TheHyper:0104A93E 5D                                pop     ebp</span><br><span class="line">TheHyper:0104A93F C3                                retn</span><br><span class="line">TheHyper:0104A93F</span><br><span class="line">TheHyper:0104A93F                   start           endp</span><br><span class="line"></span><br><span class="line">TheHyper:0104A884 E8 14 00 00 00                    call    loc_104A89D</span><br><span class="line">TheHyper:0104A884</span><br><span class="line">TheHyper:0104A884                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A889 1A 37 01 01                       dd offset GetProcAddress</span><br><span class="line">TheHyper:0104A88D 16 37 01 01                       dd offset LoadLibraryA</span><br><span class="line">TheHyper:0104A891 0E 6F 03 00                       dd 36F0Eh</span><br><span class="line">TheHyper:0104A895 97 37 01 01                       dd offset unk_1013797</span><br><span class="line">TheHyper:0104A899 2F A8 04 01                       dd offset VM__BeginExecution</span><br><span class="line">TheHyper:0104A89D                   ; ----------------------------------------------------</span><br></pre></td></tr></table></figure>
+<p>注意第一个call，call指令会将下一条指令的地址压栈，即栈顶为0104A889，然后在loc_104A89D中第一条指令就是pop esi，所以esi<br>的值就是0x0104A889，而且在loc_104a89d中并没有ret指令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pop     esi</span><br><span class="line">TheHyper:0104A89E E8 0D 00 00 00                    call    loc_104A8B0</span><br><span class="line">TheHyper:0104A89E</span><br><span class="line">TheHyper:0104A89E                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A8A3 6B 65 72 6E 65 6C+str__Kernel32_dll_0 db &apos;kernel32.dll&apos;,0</span><br><span class="line">TheHyper:0104A8B0                   ; ---------------------------------------------------------------------------</span><br><span class="line">TheHyper:0104A8B0</span><br><span class="line">TheHyper:0104A8B0                   loc_104A8B0:                            ; CODE XREF: start+22↑p</span><br><span class="line">TheHyper:0104A8B0 8B 46 04                          mov     eax, [esi+4]</span><br><span class="line">TheHyper:0104A8B3 FF 10                             call    dword ptr [eax]</span><br></pre></td></tr></table></figure>
+<p>首先是0104A89E处的call，这个call会将0104A8A3压入栈中，该地址其实为kernel32.dll字符串的指针esi+4即为LoadLibraryA，则下面的call就是call LoadLibraryA，而参数就是通过0104A89E处的call压入栈中的kernel32.dll字符串的指针，下面就是同样的套路，最后，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TheHyper:0104A932 57                                push    edi</span><br><span class="line">TheHyper:0104A933 FF 76 08                          push    dword ptr [esi+8]</span><br><span class="line">TheHyper:0104A936 FF 76 0C                          push    dword ptr [esi+0Ch]</span><br><span class="line">TheHyper:0104A939 FF 56 10                          call    dword ptr [esi+10h]</span><br></pre></td></tr></table></figure>
+<p>通过上面的几句，进入 VM__BeginExecution（unk_1013797，36F0Eh，原栈指针），unk_1013797就是VM字节码的开始地址，即VM_EIP的初始值，通过以下可以验证：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">TheHyper:0104A849 8B 5D 08                          mov     ebx, [ebp+arg_0_VM_data_ptr]</span><br><span class="line">TheHyper:0104A84C 89 1A                             mov     [edx+VM_context_structure.VM_data], ebx</span><br><span class="line">TheHyper:0104A84E 89 5A 08                          mov     [edx+VM_context_structure.EIP], ebx</span><br></pre></td></tr></table></figure>
+<p>进入VM__BeginExecution后，就进入了正常的VM循环，即取值，译码，执行的loop</p>
+<p>重点来分析下该VM的反dump措施，就是重定向程序流，只不过方式略有不同，</p>
+<pre><code>The stolen functions are copied into VirtualAlloc&apos;ed memory.
+The API calls and API-referencing instructions point to obfuscated stubs which eventually redirect to their intended targets, which are actually in copies of the referenced DLLs, not the originals. There are 73 kilobytes&apos; worth of obfuscated stubs in the packer section.
+Relative jumps and calls travel through tiny stub functions in VirtualAlloc&apos;ed memory onto their destinations. 
+</code></pre><p>可以总结为，原来的改变执行流的语句，如call，jmp等，后面跟的地址被置为0，然后通过一系列的桩代码对该地址进行修复，修复过后，该地址会修复为动态分配的地址，接下来会跳转到动态分配的地址处去执行，也就是说所有的功能函数代码，都是出现在动态分配的内存中</p>
+<p>有一个问题一直困扰我，就是上面的措施是如何进行anti-dump的呢，可以这样理解：</p>
+<p>以 call 0x1234为例，其中0x1234是功能函数func在.text段的地址，在加过这个壳后，根据上面的分析，call 0x1234会变成call 0x0000(具体几个0看情况而定)，而原来处于.text段的0x1234处的具体的功能代码会被硬编码到TheHyper段的某个位置，而且这个位置的地址会出现在VM修复call 0x0000的桩代码中，修复的原则是，将TheHyper段的原0x1234函数体代码拷贝到一块新分配的内存区然后将call 0x0000修改为call 新分配内存区的修改，当然会对函数体本身的一些操作数地址进行修复，以确保函数体的正常运行.而dump是将进程此时在内存中的状态给转储下来，生成一个文件，我们从dump的结果出发，常规的dump的文件经过修复iat的操作即可变为可执行文件而可执行文件中只包含.text，.data段等区段，并不会将栈，堆等内存空间dump下来，也就是说，如果你在修复成功后进行dump的话，dump下来的为call 新分配的内存地址（是一个固定的数值，如0x5678），而0x5678一般是处于堆中的，是不会dump下来的，所以你dump下来的文件在执行到该语句后就会出现访问错误，我们dump的目的就是为了将具体的功能代码给dump下来，而上面的措施通过将控制流重定向到动态分配的内存空间地址来anti-dump</p>
+<p>修复错误语句的桩代码是VM才能识别的字节码</p>
+<hr>
+<p><a href="http://www.openrce.org/blog/view/913/T2_2006_VM_Analysis" target="_blank" rel="noopener">http://www.openrce.org/blog/view/913/T2_2006_VM_Analysis</a></p>
+<p><a href="http://www.openrce.org/blog/view/1110/Compiler_1,_X86_Virtualizer_0" target="_blank" rel="noopener">http://www.openrce.org/blog/view/1110/Compiler_1,_X86_Virtualizer_0</a></p>
+<p><a href="https://www.openrce.org/blog/view/1239/Part_1:__Bytecode_and_IR" target="_blank" rel="noopener">https://www.openrce.org/blog/view/1239/Part_1:__Bytecode_and_IR</a></p>
+<p><a href="http://www.msreverseengineering.com/blog/2014/6/23/vmprotect-part-0-basics" target="_blank" rel="noopener">http://www.msreverseengineering.com/blog/2014/6/23/vmprotect-part-0-basics</a></p>
+<p><a href="http://www.msreverseengineering.com/blog/2014/6/23/1v20av0uhf5kygyyaprvj2i6u5ze2a" target="_blank" rel="noopener">http://www.msreverseengineering.com/blog/2014/6/23/1v20av0uhf5kygyyaprvj2i6u5ze2a</a></p>
+<p><a href="http://www.msreverseengineering.com/blog/2014/6/23/vmprotect-part-2-primer-on-optimization" target="_blank" rel="noopener">http://www.msreverseengineering.com/blog/2014/6/23/vmprotect-part-2-primer-on-optimization</a></p>
+<p><a href="http://www.msreverseengineering.com/blog/2014/6/23/vmprotect-part-3-optimization-and-code-generation" target="_blank" rel="noopener">http://www.msreverseengineering.com/blog/2014/6/23/vmprotect-part-3-optimization-and-code-generation</a></p>
+<h1 id="VMProtect相关分析"><a href="#VMProtect相关分析" class="headerlink" title="VMProtect相关分析"></a>VMProtect相关分析</h1><p><a href="https://forum.tuts4you.com/topic/30733-vmprotect-ultra-unpacker-10/" target="_blank" rel="noopener">https://forum.tuts4you.com/topic/30733-vmprotect-ultra-unpacker-10/</a></p>
+<p>这个比较成熟，而且好像VMProtect3.0以下的可以做到通吃。。。</p>
+<p><a href="https://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwj_yKqyrL7YAhWIFJQKHZA-D5AQFgglMAA&amp;url=http%3A%2F%2Flille1tv.univ-lille1.fr%2Ftelecharge.aspx%3Fid%3Dd5b2487e-cacc-4596-ab37-dab2b362cb9e&amp;usg=AOvVaw2WDrd43-or5xXFy6sV_65u" target="_blank" rel="noopener">https://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwj_yKqyrL7YAhWIFJQKHZA-D5AQFgglMAA&amp;url=http%3A%2F%2Flille1tv.univ-lille1.fr%2Ftelecharge.aspx%3Fid%3Dd5b2487e-cacc-4596-ab37-dab2b362cb9e&amp;usg=AOvVaw2WDrd43-or5xXFy6sV_65u</a></p>
+<p><a href="http://shell-storm.org/talks/SSTIC2017_Deobfuscation_of_VM_based_software_protection.pdf" target="_blank" rel="noopener">http://shell-storm.org/talks/SSTIC2017_Deobfuscation_of_VM_based_software_protection.pdf</a></p>
+<p><a href="https://zhuanlan.kanxue.com/article-354.htm" target="_blank" rel="noopener">https://zhuanlan.kanxue.com/article-354.htm</a></p>
+<p><a href="https://lifeinhex.com/use-of-syscall-and-sysenter-in-vmprotect-3-1/" target="_blank" rel="noopener">https://lifeinhex.com/use-of-syscall-and-sysenter-in-vmprotect-3-1/</a></p>
+<p><a href="https://zhuanlan.kanxue.com/article-354.htm" target="_blank" rel="noopener">https://zhuanlan.kanxue.com/article-354.htm</a></p>
+<p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=586130" target="_blank" rel="noopener">https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=586130</a></p>
+<hr>
+<p>在52 VMProtect3分析的文章中，VM的初始化其实分为两个阶段：</p>
+<ol>
+<li><p>寄存器入栈(该栈为x86下的原始栈) + 初始化各寄存器的值(esi,ebp等)，也可以理解为将各寄存器赋予VM意义</p>
+</li>
+<li><p>通过10个pop handler将刚才压入x86栈中的真实寄存器的值复制一份到虚拟寄存器数组vm_context中</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">00481F31 Main     call console_.00436946                    ; ESP=0019FF78</span><br><span class="line"> </span><br><span class="line">；寄存器入栈</span><br><span class="line">00436946 Main     push eax                                  ; ESP=0019FF74</span><br><span class="line">00436965 Main     push eax                                  ; ESP=0019FF54</span><br><span class="line">004369A7 Main     mov ebp,esp                               ; EBP=0019FF54</span><br><span class="line">004369B0 Main     sub esp,0xC0                              ; ESP=0019FE94</span><br><span class="line">第一个pop handler：</span><br><span class="line">0043EB6B Main     mov ecx,dword ptr ss:[ebp]                ; ECX=00000000</span><br><span class="line">0042B819 Main     add ebp,0x4                               ; FL=0, EBP=0019FF58</span><br><span class="line">004539B2 Main     mov dword ptr ss:[esp+eax],ecx</span><br></pre></td></tr></table></figure>
+<p>在第一个pop handler中，结合EBP依然是vm_esp，指向虚拟栈顶,ESP成为vm_context指针来理解，可以看出是将寄存器入栈过程中的最后一个入栈的值，即0给复制到VM_context + 0x38的地方，即复制到了VM_context的第(0x38/4)=14个寄存器中，用VMP分析插件的命名风格，即为vPopReg4 R14 (0x38)，注意上述指令中esp及ebp寄存器的值，不难验证，10个pop handler正好把压入x86栈中的10个值给复制了一份到VM_context中这10个值，由为了恢复x86环境的8个寄存器的值 + VM中要用到的2个值组成，一个是解密的初始key，一个是参数0</p>
+<p>初始化可以理解为x86 -&gt; VM的crossover</p>
+<p>执行完上面的初始化后，就开始了与原指令相同功能的VM handler的执行，考虑到VM是栈机，所以一条CISC指令会变为几条RISC指令来通过<br>栈操作来实现，比如mov eax, 0deadbeefh就会变为push + pop实现，即vPushImm4 DEADBEEF vPopReg4 R4 (0x10)</p>
+<p>执行完功能代码对应的VM字节码，就需要完成VM -&gt; x86的crossover了：</p>
+<ol>
+<li><p>将VM_context保存的用于恢复x86环境的寄存器的值复制一份到x86栈上，</p>
+</li>
+<li><p>栈桢切换 + pop恢复x86环境，也可以理解为将各寄存器恢复x86意义</p>
+</li>
+</ol>
+<hr>
+<p><a href="https://www.52pojie.cn/thread-607830-1-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-607830-1-1.html</a></p>
+<p>上面很多文章中都提到了解决VMProtect的思路：</p>
+<ol>
+<li>分析VM机，得到整个VM机的handler机器对应语义，据此来解释VM字节码的含义，得到程序原始功能，在VM字节码翻译为x86汇编码的过程中，可以使用IR、编译优化等来达到化简的效果</li>
+<li>通过动态执行以及污点分析等技术，分析VM机解析VM字节码功能的变化，将该功能的变化用其他语言来进行描述，使之产生相同的影响，即只在功能上恢复原程序（这种方法前景较大）</li>
+</ol>
+<h1 id="VMProtect-辅助工具"><a href="#VMProtect-辅助工具" class="headerlink" title="VMProtect 辅助工具"></a>VMProtect 辅助工具</h1><p><a href="https://www.52pojie.cn/thread-381423-1-1.html" title="VMProtect 2.13.8软件下载" target="_blank" rel="noopener">https://www.52pojie.cn/thread-381423-1-1.html</a></p>
+<p><a href="https://github.com/jjyg/metasm" target="_blank" rel="noopener">https://github.com/jjyg/metasm</a></p>
+<p><a href="https://github.com/0xbadc0de1/VmP_DBG" target="_blank" rel="noopener">https://github.com/0xbadc0de1/VmP_DBG</a></p>
+<p><a href="https://github.com/0xbadc0de1/VMP_Tools/tree/master/Documents/Visual%20Studio%202013/Projects/vmp_coprocessor/vmp_coprocessor" target="_blank" rel="noopener">https://github.com/0xbadc0de1/VMP_Tools/tree/master/Documents/Visual%20Studio%202013/Projects/vmp_coprocessor/vmp_coprocessor</a></p>
+<p><a href="https://github.com/JonathanSalwan/Tigress_protection" title="JonathanSalwan的壳，有兴致时看看源码" target="_blank" rel="noopener">https://github.com/JonathanSalwan/Tigress_protection</a></p>
+<p><a href="https://github.com/anatolikalysch/VMAttack" target="_blank" rel="noopener">https://github.com/anatolikalysch/VMAttack</a></p>
+<p><a href="https://github.com/jnraber/VirtualDeobfuscator" target="_blank" rel="noopener">https://github.com/jnraber/VirtualDeobfuscator</a></p>
+<h1 id="小结-amp-计划"><a href="#小结-amp-计划" class="headerlink" title="小结 &amp; 计划"></a>小结 &amp; 计划</h1><ol>
+<li>搞不动VMProtect3.x</li>
+<li>本想早点分析VMProtect的工具的源码来读下，但读不下去，关键是兴致没了</li>
+<li>在此过程中，看到了动态执行、污点分析、数据流分析之类的，接下来应该会去搞搞这方面，看能不能把我在angr理解方面的问题解决了，这里会以JonathanSalwan的Triton为切入点来进行研究，JonathanSalwan牛逼，orz!!!</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#书接上文"><span class="toc-number">1.</span> <span class="toc-text">书接上文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#VMProtect-入门"><span class="toc-number">2.</span> <span class="toc-text">VMProtect 入门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#VMProtect相关分析"><span class="toc-number">3.</span> <span class="toc-text">VMProtect相关分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#VMProtect-辅助工具"><span class="toc-number">4.</span> <span class="toc-text">VMProtect 辅助工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小结-amp-计划"><span class="toc-number">5.</span> <span class="toc-text">小结 & 计划</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/03/About-VMProtect/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/03/About-VMProtect/&text=About VMProtect"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/03/About-VMProtect/&title=About VMProtect"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/03/About-VMProtect/&is_video=false&description=About VMProtect"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=About VMProtect&body=Check out this article: http://yoursite.com/2018/01/03/About-VMProtect/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/03/About-VMProtect/&title=About VMProtect"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/03/About-VMProtect/&title=About VMProtect"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/03/About-VMProtect/&title=About VMProtect"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/03/About-VMProtect/&title=About VMProtect"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/03/About-VMProtect/&name=About VMProtect&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 b33t1e
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
