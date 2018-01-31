@@ -13,7 +13,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/30/klee源码分析/index.html">
 <meta property="og:site_name" content="b33t1e">
 <meta property="og:description" content="最近一个月在看符号执行相关的东西，有了初步的理解，感觉还是得结合具体的实践才能加深理解，但手头没相关工作，所以对符号执行到现在也感觉理解的不是很到位。 思想付诸代码实践根据以往学习新知识的经验，决定找一个符号执行的工具，通过啃源码来学习相关思想。于是找到了klee。 klee基于LLVM，针对的是llvm能够识别的由clang编译源代码生成的.bc文件，支不支持二进制程序我不知道。在这里，可以这样">
-<meta property="og:updated_time" content="2018-01-31T02:37:24.278Z">
+<meta property="og:updated_time" content="2018-01-31T02:41:17.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="klee源码分析">
 <meta name="twitter:description" content="最近一个月在看符号执行相关的东西，有了初步的理解，感觉还是得结合具体的实践才能加深理解，但手头没相关工作，所以对符号执行到现在也感觉理解的不是很到位。 思想付诸代码实践根据以往学习新知识的经验，决定找一个符号执行的工具，通过啃源码来学习相关思想。于是找到了klee。 klee基于LLVM，针对的是llvm能够识别的由clang编译源代码生成的.bc文件，支不支持二进制程序我不知道。在这里，可以这样">
@@ -201,6 +201,7 @@
 <p>该函数就是做一个基本块的转换，这个函数改变的唯一变量就是state的pc值了，仅仅是将pc值置为将要跳转到的下一个基本块的入口，以此来完成基本块的转换而在完成转换的过程中，由于可能将要跳转的基本块的入口是一个phi指令，所以需要做额外的处理，而这个额外的处理就是记录下到达该phi node所在基本块的前置基本块，以方便决定phi的值</p>
 <p><strong>Arithmetic / logical</strong></p>
 <p>对于逻辑运算指令，只是在对应的地址绑定上对应的符号化表达式，这种符号化的表达式是求解器可以识别的</p>
+<p><strong>其他</strong><br>对于其他的指令，需要说明的与上述指令类似，这里忽略，有兴趣的自行研究</p>
 <h1 id="After"><a href="#After" class="headerlink" title="After"></a>After</h1><p>勉勉强强读完了klee的主流程代码，感觉符号执行更像是一种思想，将可变输入用符号X(与数学中的X有着差不多的意思)进行代替，对程序的执行流程进行模拟，对执行过程中x的变换f进行记录，记录成求解器可以识别的表达式的形式f(x)，在任何需要知道x所代表的值的程序执行点，都可以用求解器对f(x)进行求解。对程序的执行流程的模拟，一般可以基于某种指令集，结合一些数据结构来实现，比如klee基于LLVM。而整个的模拟的过程，都是我们可以进行代码干预的，比如在何时进行信息记录，在何时进行数据的改变等等，都是可以在模拟执行的过程中通过一些插桩代码进行实现的，这些插桩代码也可以实现我们所需要的对于程序的分析，比如污点分析。</p>
 <p>接下来会去看JonathanSalwan的Triton的相关资料，并阅读该项目的源码，以加深自己在这方面的理解。</p>
 
