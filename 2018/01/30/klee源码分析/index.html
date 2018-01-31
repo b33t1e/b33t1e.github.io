@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="最近一个月在看符号执行相关的东西，有了初步的理解，感觉还是得结合具体的实践才能加深理解，但手头没相关工作，所以对符号执行到现在也感觉理解的不是很到位。 思想付诸代码实践根据以往学习新知识的经验，决定找一个符号执行的工具，通过啃源码来学习相关思想。于是找到了klee。 klee基于LLVM，针对的是llvm能够识别的由c">
+<meta name="keywords" content="symbolic execution">
+<meta property="og:type" content="article">
+<meta property="og:title" content="klee源码分析">
+<meta property="og:url" content="http://yoursite.com/2018/01/30/klee源码分析/index.html">
+<meta property="og:site_name" content="b33t1e">
+<meta property="og:description" content="最近一个月在看符号执行相关的东西，有了初步的理解，感觉还是得结合具体的实践才能加深理解，但手头没相关工作，所以对符号执行到现在也感觉理解的不是很到位。 思想付诸代码实践根据以往学习新知识的经验，决定找一个符号执行的工具，通过啃源码来学习相关思想。于是找到了klee。 klee基于LLVM，针对的是llvm能够识别的由clang编译源代码生成的.bc文件，支不支持二进制程序我不知道。在这里，可以这样">
+<meta property="og:updated_time" content="2018-01-31T02:37:24.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="klee源码分析">
+<meta name="twitter:description" content="最近一个月在看符号执行相关的东西，有了初步的理解，感觉还是得结合具体的实践才能加深理解，但手头没相关工作，所以对符号执行到现在也感觉理解的不是很到位。 思想付诸代码实践根据以往学习新知识的经验，决定找一个符号执行的工具，通过啃源码来学习相关思想。于是找到了klee。 klee基于LLVM，针对的是llvm能够识别的由clang编译源代码生成的.bc文件，支不支持二进制程序我不知道。在这里，可以这样">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>klee源码分析</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2018/01/03/About-VMProtect/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/30/klee源码分析/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/30/klee源码分析/&text=klee源码分析"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/30/klee源码分析/&title=klee源码分析"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/30/klee源码分析/&is_video=false&description=klee源码分析"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=klee源码分析&body=Check out this article: http://yoursite.com/2018/01/30/klee源码分析/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/30/klee源码分析/&title=klee源码分析"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/30/klee源码分析/&title=klee源码分析"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/30/klee源码分析/&title=klee源码分析"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/30/klee源码分析/&title=klee源码分析"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/30/klee源码分析/&name=klee源码分析&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#思想付诸代码实践"><span class="toc-number">1.</span> <span class="toc-text">思想付诸代码实践</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#After"><span class="toc-number">2.</span> <span class="toc-text">After</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        klee源码分析
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">b33t1e</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-30T03:24:33.000Z" itemprop="datePublished">2018-01-30</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/symbolic-execution/">symbolic execution</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>最近一个月在看符号执行相关的东西，有了初步的理解，感觉还是得结合具体的实践才能加深理解，但手头没相关工作，所以对符号执行到现在也感觉理解的不是很到位。</p>
+<h1 id="思想付诸代码实践"><a href="#思想付诸代码实践" class="headerlink" title="思想付诸代码实践"></a>思想付诸代码实践</h1><p>根据以往学习新知识的经验，决定找一个符号执行的工具，通过啃源码来学习相关思想。于是找到了klee。</p>
+<p>klee基于LLVM，针对的是llvm能够识别的由clang编译源代码生成的.bc文件，支不支持二进制程序我不知道。在这里，可以这样理解，llvm将c源码转化为其可以识别的llvm指令字节码，klee以llvm指令集为基础，对llvm指令进行模拟执行，并在模拟执行的过程中结合一些数据结构来实现符号执行的思想。</p>
+<p>下面来具体分析klee源码。关于源码的注释，有兴趣的可以通过邮箱找我获取。</p>
+<hr>
+<p>在tools/klee文件夹下找到main.cpp文件，将该文件的main函数作为程序的起始点。在此说明下，对于replay相关的执行流程，暂且忽略，不影响问题的研究。在main函数中：</p>
+<ol>
+<li>llvm相关的初始化工作</li>
+<li>fork一个WatchDog，用于监视超时时间</li>
+<li>初始化两个全局变量，ctx和mainModule。ctx类管理着与llvm核心框架相关的一些全局数据；mainModule存储着LLVM module所有的信息，是所有LLVM IR的最顶级容器。</li>
+<li>完成主程序模块与各种libc的链接</li>
+<li>将用户指定的环境变量的配置文件中的具体配置读出并存储到pEnvp变量中；将用户参数存储到pArgv变量中</li>
+<li>实例化一个interpreter，并在externalsAndGlobalsCheck(finalModule)中执行一些看不太懂得check。</li>
+<li>执行关键函数runFunctionAsMain</li>
+<li>打印一些结果信息</li>
+</ol>
+<p>上面的代码主要是准备解释执行的环境，然后进入具体的解释执行函数interpreter-&gt;runFunctionAsMain(mainFn, out-&gt;numArgs, out-&gt;args, pEnvp)，该函数的参数说明执行的初始函数为mainFn，参数为out-&gt;numArgs和out-&gt;args，执行环境为pEnvp。在runFunctionAsMain函数中：</p>
+<ol>
+<li>在klee的functionMap中找到参数f对应的函数(这里为main)，并用KFunction这个结构进行结构化，以便能够被klee识别和使用</li>
+<li>迭代枚举main的参数，为argc个参数以及envc个环境变量分配指针空间，并存储在arguments这个向量中(这里，klee好像规定解释执行的函数(这里为main)的参数不能超过3个)</li>
+<li>初始化记录混合符号执行路径以及单纯符号执行路径的流pathOS和symPathOS</li>
+<li>记录符号执行时的状态切换，根据参数parentFrame为0可知，现在为初始状态</li>
+<li>绑定参数，这里对于参数绑定的方法有点类似于压栈的操作，将参数复制到描述当前函数调用的StackFrame栈桢结构中，可以理解为模拟main函数执行的环境。对于klee绑定操作的解释，这里引用<a href="http://www.chengyuzhang.com/article/135" title="KLEE概览" target="_blank" rel="noopener">http://www.chengyuzhang.com/article/135</a>对内存模型(Memory model)的解释:</li>
+</ol>
+<blockquote>
+<p>MemoryObject 表示程序里面的地址分配（比如说调用malloc，stack objects， global variables），同时我们也可以简单的认为它是一个分配在某个地址上的对象独一无二的名字。ObjectState 是用来存储在一个特定的ExecutionState 中一个MemoryObject 中实际的内容（是不能被共享的）。事实上，我觉得这两个东西应该有更好的名字才对。</p>
+<p>每一个ExecutionState 使用AddressSpace 数据结构来保存从MemoryObjects -&gt; ObjectState 的映射（AddressSpace是通过一个固定的树来实现的，所以可以很轻易的复制和共享）。每个AddressSpace都会包含在映射中ObjectStates 的一部分。当一个AddressSpace被复制的时候，它会丢失它所包含的ObjectState。之后所有对ObjectState的写入操作，都会生成一个这个对象的复制（AddressSpace::getWriteable）。这是一个保险机制（这个机制对所有的对象都是有效的，不仅仅的全局对象）。</p>
+<p>从状态和映射的角度来看，堆、栈和全局对象并没有什么区别。唯一对栈对象有一些些不同的处理就是，MemoryObject会被标记为isLocal并且这个MemoryObject会被存储在StackFrame的分配表里面。当StackFrame进行pop之后，这些对象都会被释放掉，以至于当前状态就再也不能直接访问内存了（对内存对象的引用可能仍然会在ReadExprs里，但是理论上说，实际的地址我们应该是找不到了）。</p>
+<p>另外很重要的一点是，AddressSpace的映射是有序的。当我们想将一个符号化的地址解析为ObjectState时我们会用到它，我们先用一个特殊的值来表示符号化的地址，然后用这个值来找那些指针指向这个地址的对象。MemoryObjects和ObjectStates并没有什么区别。</p>
+</blockquote>
+<p>简单来说，ExecutionState 使用AddressSpace 数据结构来保存从MemoryObjects -&gt; ObjectState 的映射，这个映射代表着MemoryObject存储这ObjectState这个东西。这一步中对于参数的操作可以理解为将参数用MemoryObject和ObjectState等klee能够进行管理的类进行封装，以便后续使用。</p>
+<ol>
+<li>将当前进程作为进程树的根节点，进入核心函数run(*state)</li>
+<li>执行完run函数后，进行一些善后处理</li>
+</ol>
+<p>在函数run(*state)中：</p>
+<ol>
+<li>通过bindModuleConstants()函数对模块中每个函数的每条指令的常数进行一定的处理，将处理后的结果存储在某个数据结构中，在bindModuleConstants()函数中，是按照模块-&gt;函数-&gt;指令的层次结构来进行划分，逐层迭代的</li>
+<li>将当前state添加到states这个全局中，这里说明一下，对于Executor的种子执行模式，我们也不关心。</li>
+<li>在stepInstruction(state)函数中，对当前指令的covered属性进行判断并将该信息记录到相应数据结构中这里说明一下，只有当当前指令是unreachable，并且他的上条指令是不带return的函数调用时，该指令的covered属性才为false，其余情况下都记为true，记录后会将pc指向下一条指令</li>
+<li>通过executeInstruction(state, ki)函数，基于llvm指令集，对当前指令进行具体的模拟执行</li>
+<li>在updateStates(&amp;state)中，对states进行更新。不同的搜索策略，其更新states这个管理所有state的全局变量的策略不同</li>
+<li>时间相关的check，不关心</li>
+<li>紧接着是得到一个searcher实例，然后通过该实例所采取的搜索策略来搜索执行下一个state，就这样进行搜索state-&gt;执行state的循环，直到执行完毕</li>
+</ol>
+<p>在executeInstruction(state, ki)函数中，是对指令字节码的具体解析，指令细节可参考<a href="http://llvm.org/docs/LangRef.html" target="_blank" rel="noopener">http://llvm.org/docs/LangRef.html</a>，下面以几个比较具有代表性的指令为例：</p>
+<p><strong>Instruction::Ret</strong>：</p>
+<ol>
+<li>用llvm对应的指令形式包装一下</li>
+<li>得到ret所在的函数 的调用语句的地址</li>
+<li>查看ret指令后是否有操作数</li>
+<li>如果栈桢数目&lt;=1，则考虑到栈桢的层层叠加的性质，当栈中的栈桢数为1时，说明该ret指令执行完毕后，程序就进入到了初始栈桢，意味着整个程序即将执行完毕，所以下面会exit；否则的话，由于ret指令的功能，执行完该条，就返回到了上一个栈桢，即调用者所在的栈桢，所以需要将当前栈桢弹出。</li>
+<li>设置正确的PC值</li>
+<li>当存在操作数时，对操作数进行处理</li>
+</ol>
+<p><strong>Instruction::Br</strong></p>
+<ol>
+<li>分为无条件跳转和有条件跳转。如果为无条件跳转，则只需进行基本块的切换即可</li>
+<li>对于有条件跳转，通过Executor::StatePair branches = fork(state, cond, false)来处理分支，对于分支的处理，可以概括为：拿着该分支的限制条件(布尔表达式的并集)去找求解器进行求解，以此来判断两条分支的可行性，可行的分支会返回一个与其相对应的state实例，不可行的话会返回0，比如，若都可行，则返回(trueState,falseState)</li>
+<li>对一些统计信息进行更新，举个例子，如果传进该函数的状态非空，并且在统计管理器中找不到该状态的索引的话，则认为该状态是coveredNew的，即新覆盖的</li>
+<li>判断条件分支语句下的两个分支是否都可满足,然后通过函数transferToBasicBlock进行具体的基本块的切换</li>
+</ol>
+<p>这里需要对void Executor::transferToBasicBlock(BasicBlock <em>dst, BasicBlock </em>src,ExecutionState &amp;state)这个函数进行说明：</p>
+<p>该函数就是做一个基本块的转换，这个函数改变的唯一变量就是state的pc值了，仅仅是将pc值置为将要跳转到的下一个基本块的入口，以此来完成基本块的转换而在完成转换的过程中，由于可能将要跳转的基本块的入口是一个phi指令，所以需要做额外的处理，而这个额外的处理就是记录下到达该phi node所在基本块的前置基本块，以方便决定phi的值</p>
+<p><strong>Arithmetic / logical</strong></p>
+<p>对于逻辑运算指令，只是在对应的地址绑定上对应的符号化表达式，这种符号化的表达式是求解器可以识别的</p>
+<h1 id="After"><a href="#After" class="headerlink" title="After"></a>After</h1><p>勉勉强强读完了klee的主流程代码，感觉符号执行更像是一种思想，将可变输入用符号X(与数学中的X有着差不多的意思)进行代替，对程序的执行流程进行模拟，对执行过程中x的变换f进行记录，记录成求解器可以识别的表达式的形式f(x)，在任何需要知道x所代表的值的程序执行点，都可以用求解器对f(x)进行求解。对程序的执行流程的模拟，一般可以基于某种指令集，结合一些数据结构来实现，比如klee基于LLVM。而整个的模拟的过程，都是我们可以进行代码干预的，比如在何时进行信息记录，在何时进行数据的改变等等，都是可以在模拟执行的过程中通过一些插桩代码进行实现的，这些插桩代码也可以实现我们所需要的对于程序的分析，比如污点分析。</p>
+<p>接下来会去看JonathanSalwan的Triton的相关资料，并阅读该项目的源码，以加深自己在这方面的理解。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#思想付诸代码实践"><span class="toc-number">1.</span> <span class="toc-text">思想付诸代码实践</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#After"><span class="toc-number">2.</span> <span class="toc-text">After</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/01/30/klee源码分析/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/01/30/klee源码分析/&text=klee源码分析"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/01/30/klee源码分析/&title=klee源码分析"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/01/30/klee源码分析/&is_video=false&description=klee源码分析"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=klee源码分析&body=Check out this article: http://yoursite.com/2018/01/30/klee源码分析/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/01/30/klee源码分析/&title=klee源码分析"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/01/30/klee源码分析/&title=klee源码分析"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/01/30/klee源码分析/&title=klee源码分析"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/01/30/klee源码分析/&title=klee源码分析"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/01/30/klee源码分析/&name=klee源码分析&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 b33t1e
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/b33t1e">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
